@@ -15,6 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.github.ybq.android.spinkit.SpinKitView;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -41,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     VerticalAdapter verticalAdapter;
     List<Popular> popularList;
     List<Datum> dataList;
-    ProgressBar progressBar;
+//    ProgressBar progressBar;
+    SpinKitView spin_kit;
     RelativeLayout relativeLayout;
     private ApiInterface apiInterface;
 
@@ -56,17 +59,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewHorizontal.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewVertical.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
+//        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        spin_kit = findViewById(R.id.spin_kit);
         popularList = Collections.<Popular>emptyList();
         dataList = Collections.<Datum>emptyList();
         apiInterface = RetrofitApiClient.getClient().create(ApiInterface.class);
 
         if (NetworkCheckingClass.isNetworkAvailable(this)) {
-            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.VISIBLE);
+            spin_kit.setVisibility(View.VISIBLE);
             fetchData();
         } else {
-            progressBar.setVisibility(View.GONE);
+//            progressBar.setVisibility(View.GONE);
+            spin_kit.setVisibility(View.GONE);
             Toast.makeText(this, "No internet Connection", Toast.LENGTH_LONG).show();
         }
 
@@ -84,21 +89,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
-                switch(id)
+                switch (id)
                 {
                     case R.id.account:
                         Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();
+                        break;
                     case R.id.settings:
                         Toast.makeText(MainActivity.this, "Settings",Toast.LENGTH_SHORT).show();
+                        break;
                     case R.id.mycart:
                         Toast.makeText(MainActivity.this, "My Cart", Toast.LENGTH_SHORT).show();
+                        break;
                     default:
-                        return true;
+                        break;
                 }
 
-
-
-
+                return false;
             }
         });
 
@@ -132,7 +138,8 @@ public class MainActivity extends AppCompatActivity {
                 if (popularList.size() > 0)
                     recyclerViewHorizontal.addItemDecoration(new GridSpacingItemDecoration(popularList.size(), spacingInPixels, true, 0));
 
-                progressBar.setVisibility(View.GONE);
+//                progressBar.setVisibility(View.GONE);
+                spin_kit.setVisibility(View.GONE);
 
                 relativeLayout.setBackgroundColor(Color.parseColor("#3481c1"));
 
@@ -145,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonData> call, Throwable t) {
-                progressBar.setVisibility(View.GONE);
+//                progressBar.setVisibility(View.GONE);
+                spin_kit.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
             }
         });

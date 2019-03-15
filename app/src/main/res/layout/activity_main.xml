@@ -18,13 +18,21 @@
 
         </android.support.v7.widget.RecyclerView>
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
-            android:layout_height="wrap_content"
+        <!--<ProgressBar-->
+            <!--android:id="@+id/progressBar"-->
+            <!--style="@android:style/Widget.DeviceDefault.Light.ProgressBar"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_centerVertical="true"/>-->
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Large.Wave"
             android:layout_width="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:SpinKit_Color="@color/colorAccent" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/vertical_recycler_view"
